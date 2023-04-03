@@ -1,0 +1,37 @@
+:root {
+    --primary-color: rgb(106, 199, 236)
+}
+
+
+.navbar-nav .nav-item {
+    padding-left: 10px;
+    padding-right: 10px
+}
+
+.navbar-nav .nav-link.active {
+    color: var(--primary-color)
+}
+
+.navbar-nav .nav-link {
+    font-size: 18px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--primary-color)
+}
+
+.navbar-nav button {
+    font-size: 20px;
+    position: relative;
+}
+
+.navbar-nav button .badge {
+    padding: 5px 8px;
+    border-radius: 50%;
+    color: white;
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background-color: var(--primary-color);
+}
+
