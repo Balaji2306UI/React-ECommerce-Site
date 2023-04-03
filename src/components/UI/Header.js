@@ -7,7 +7,7 @@ import Badge from "react-bootstrap/Badge";
 
 import "./Header.css";
 
-function Header() {
+function Header(props) {
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
@@ -28,7 +28,7 @@ function Header() {
                     <Nav.Item as="li">
                         <Nav.Link href="#about">About</Nav.Link>
                     </Nav.Item>
-                    <Button variant="dark">
+                    <Button variant="dark" onClick = { props.showCart }>
                         <i className="fa-solid fa-cart-shopping"></i>
                         <Badge>4</Badge>
                     </Button>
