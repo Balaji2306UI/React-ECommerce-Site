@@ -2,6 +2,8 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Table from "react-bootstrap/Table";
+import InputGroup from "react-bootstrap/InputGroup";
+import Form from "react-bootstrap/Form";
 
 function Cart(props) {
     return (
@@ -32,17 +34,37 @@ function Cart(props) {
                             .map((product) => (
                                 <tr>
                                     <td className="align-middle">
-                                        <img src={product.imageUrl} alt="product" />
+                                        <img
+                                            src={product.imageUrl}
+                                            alt="product"
+                                        />
                                         <span>{product.title}</span>
                                     </td>
                                     <td className="align-middle">
-                                        { product.price }
+                                        {product.price}
                                     </td>
                                     <td className="align-middle">
-                                        <input value={product.quantity} style={{width: "auto"}}/>
-                                        <Button variant="danger">REMOVE</Button>
+                                        <InputGroup className="mb-3">
+                                            <Button
+                                                variant="outline-danger"
+                                                id="button-addon1"
+                                            >
+                                                <i className="fa-solid fa-minus"></i>
+                                            </Button>
+                                            <Form.Control
+                                                aria-label="Example text with button addon"
+                                                aria-describedby="basic-addon1"
+                                                value={product.quantity}
+                                                style={{display: "inline-block", width: "5px"}}
+                                            />
+                                            <Button
+                                                variant="outline-success"
+                                                id="button-addon2"
+                                            >
+                                                <i class="fa-solid fa-plus"></i>
+                                            </Button>
+                                        </InputGroup>
                                     </td>
-                                    
                                 </tr>
                             ))}
                     </tbody>
