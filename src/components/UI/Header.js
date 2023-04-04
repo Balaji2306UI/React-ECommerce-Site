@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
+import CartContext from "../store/cart-context";
 
 import "./Header.css";
 
 function Header(props) {
+    const cartCtx = useContext(CartContext);
+
+    let totalCartItems = cartCtx.cartItems.reduce((totalItems, item) => {
+        return totalItems + item.quantity;
+    }, 0);
+
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
@@ -30,7 +37,7 @@ function Header(props) {
                     </Nav.Item>
                     <Button variant="dark" onClick = { props.showCart }>
                         <i className="fa-solid fa-cart-shopping"></i>
-                        <Badge>4</Badge>
+                        {totalCartItems && (<Badge>{totalCartItems}</Badge>)}
                     </Button>
                 </Nav>
             </Container>

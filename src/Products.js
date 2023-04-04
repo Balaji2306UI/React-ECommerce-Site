@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import CartContext from "./components/store/cart-context";
 
 const Products = (props) => {
+    const cartCtx = useContext(CartContext);
+    
     return (
         <Container className="text-center">
             <Row
@@ -14,7 +17,7 @@ const Products = (props) => {
                 lg={3}
                 className="justify-content-center g-5 p-5"
             >
-                {props.data.map((product, index) => {
+                {cartCtx.cartItems.map((product, index) => {
                     let halfStar =
                         (product.rating * 10) % 10 > 0 ? true : false;
                     let starsCount = Math.floor(product.rating);
@@ -51,7 +54,7 @@ const Products = (props) => {
                                         </div>
                                     </Card.Text>
                                     <div className="row">
-                                        <Button>ADD TO CART</Button>
+                                        <Button onClick={() => cartCtx.addItem(product.id)}>ADD TO CART</Button>
                                     </div>
                                 </Card.Body>
                             </Card>

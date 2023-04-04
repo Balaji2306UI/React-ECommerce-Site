@@ -5,7 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/UI/Header";
 import Footer from "./components/UI/Footer";
 import Products from "./Products";
-import Cart from "./components/Cart"
+import Cart from "./components/Cart";
+import CartProvider from "./components/store/CartProvider";
 
 const productsArr = [
     {
@@ -48,12 +49,12 @@ function App() {
     const hideCart = () => setShow(false);
     const showCart = () => setShow(true);
     return (
-        <>
+        <CartProvider>
 			<Cart show={ show } hideCart={ hideCart } data={ productsArr } />
             <Header showCart={ showCart } />
             <Products data={ productsArr } />
             <Footer />
-        </>
+        </CartProvider>
     );
 }
 

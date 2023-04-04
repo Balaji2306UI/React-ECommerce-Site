@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Table from "react-bootstrap/Table";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
+import CartContext from "./store/cart-context";
 
 function Cart(props) {
+    let cartCtx = useContext(CartContext);
     return (
         <Modal
             show={props.show}
@@ -29,7 +31,7 @@ function Cart(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {props.data
+                        {cartCtx.cartItems
                             .filter((product) => product.quantity > 0)
                             .map((product) => (
                                 <tr>
