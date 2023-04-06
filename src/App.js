@@ -11,15 +11,16 @@ import CartProvider from "./components/store/CartProvider";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./pages/Root";
 import AboutPage from "./pages/About";
+import HomePage from "./pages/Home";
 
 const routes = createBrowserRouter([
     {
         path: "/",
         element: <Root />,
         children: [
-            { path: "/", element: <AboutPage /> },
+            { path: "/", element: <HomePage /> },
             { path: "/about", element: <AboutPage /> },
-            { path: "/store", element: <Products data={productsArr} /> },
+            { path: "/store", element: <Products /> },
         ],
     },
 ]);
