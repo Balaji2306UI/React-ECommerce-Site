@@ -8,6 +8,22 @@ import Products from "./Products";
 import Cart from "./components/Cart";
 import CartProvider from "./components/store/CartProvider";
 
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Root from "./pages/Root";
+import AboutPage from "./pages/About";
+
+const routes = createBrowserRouter([
+    {
+        path: "/",
+        element: <Root />,
+        children: [
+            { path: "/", element: <AboutPage /> },
+            { path: "/about", element: <AboutPage /> },
+            { path: "/store", element: <Products data={productsArr} /> },
+        ],
+    },
+]);
+
 const productsArr = [
     {
         title: "Colors",
@@ -15,7 +31,7 @@ const productsArr = [
         imageUrl:
             "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
         rating: 4.5,
-		quantity: 2
+        quantity: 2,
     },
     {
         title: "Black and white Colors",
@@ -23,7 +39,7 @@ const productsArr = [
         imageUrl:
             "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
         rating: 4,
-		quantity: 1
+        quantity: 1,
     },
     {
         title: "Yellow and Black Colors",
@@ -31,7 +47,7 @@ const productsArr = [
         imageUrl:
             "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
         rating: 3.5,
-		quantity: 0
+        quantity: 0,
     },
     {
         title: "Blue Color",
@@ -39,7 +55,7 @@ const productsArr = [
         imageUrl:
             "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
         rating: 5,
-		quantity: 3
+        quantity: 3,
     },
 ];
 
@@ -48,14 +64,17 @@ function App() {
 
     const hideCart = () => setShow(false);
     const showCart = () => setShow(true);
+    /*
     return (
         <CartProvider>
-			<Cart show={ show } hideCart={ hideCart } data={ productsArr } />
-            <Header showCart={ showCart } />
-            <Products data={ productsArr } />
+            <Cart show={show} hideCart={hideCart} data={productsArr} />
+            <Header showCart={showCart} />
+            <Products data={productsArr} />
             <Footer />
         </CartProvider>
     );
+    */
+    return <RouterProvider router={routes} />;
 }
 
 export default App;

@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import CartContext from "./components/store/cart-context";
 
-const Products = (props) => {
+const Products = () => {
     const cartCtx = useContext(CartContext);
     
     return (

@@ -7,6 +7,7 @@ import Badge from "react-bootstrap/Badge";
 import CartContext from "../store/cart-context";
 
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 function Header(props) {
     const cartCtx = useContext(CartContext);
@@ -16,7 +17,7 @@ function Header(props) {
     }, 0);
 
     return (
-        <Navbar bg="dark" variant="dark">
+        <Navbar bg="dark" variant="dark" fixed="top">
             <Container>
                 <Navbar.Brand href="#home">
                     <h2 className="brand-name d-inline-flex">The Generics</h2>
@@ -27,17 +28,24 @@ function Header(props) {
                     as="ul"
                 >
                     <Nav.Item as="li">
-                        <Nav.Link href="#home">Home</Nav.Link>
+                        <Link className="nav-link" to="/">
+                            Home
+                        </Link>
                     </Nav.Item>
                     <Nav.Item as="li">
-                        <Nav.Link href="#store">Store</Nav.Link>
+                        <Link className="nav-link" to="/about">
+                            About
+                        </Link>
                     </Nav.Item>
                     <Nav.Item as="li">
-                        <Nav.Link href="#about">About</Nav.Link>
+                        <Link className="nav-link" to="/store">
+                            Store
+                        </Link>
                     </Nav.Item>
-                    <Button variant="dark" onClick = { props.showCart }>
+
+                    <Button variant="dark" onClick={props.showCart}>
                         <i className="fa-solid fa-cart-shopping"></i>
-                        {totalCartItems && (<Badge>{totalCartItems}</Badge>)}
+                        <Badge>{totalCartItems}</Badge>
                     </Button>
                 </Nav>
             </Container>
