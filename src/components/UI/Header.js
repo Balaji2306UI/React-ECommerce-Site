@@ -42,6 +42,11 @@ function Header(props) {
                             Store
                         </Link>
                     </Nav.Item>
+                    <Nav.Item as="li">
+                        <Link className="nav-link" to="/contact">
+                            Contact
+                        </Link>
+                    </Nav.Item>
 
                     <Button variant="dark" onClick={props.showCart}>
                         <i className="fa-solid fa-cart-shopping"></i>
