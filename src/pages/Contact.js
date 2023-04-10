@@ -35,7 +35,7 @@ const Contact = () => {
     };
 
     return (
-        <Card style={{ width: "50rem" }} className="shadow-lg mx-auto mt-3">
+        <Card style={{ width: "40rem" }} className="shadow-lg mx-auto mt-3 p-4">
             <Card.Title className="mx-auto mt-3 text-center">
                 CONTACT US
             </Card.Title>

@@ -1,16 +1,24 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../components/UI/Footer";
 import Header from "../components/UI/Header";
+import Cart from "../components/Cart";
 import CartProvider from "../components/store/CartProvider";
+import { useState } from "react";
 
-function Root(props) {
+function Root() {
+    const [show, setShow] = useState(false);
+
+    const hideCart = () => setShow(false);
+    const showCart = () => setShow(true);
     return (
         <>
-            <Header showCart={props.showCart} />
             <CartProvider>
-            <Outlet />
+                <Cart show={show} hideCart={hideCart}/>
+                <Header showCart={showCart} />
+
+                <Outlet />
             </CartProvider>
-            
+
             <Footer />
         </>
     );

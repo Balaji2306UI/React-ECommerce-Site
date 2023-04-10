@@ -18,10 +18,18 @@ table img {
 	width: 100px
 }
 
+html, body {
+	min-height: 100vh;
+}
+
+body {
+	padding-top: 100px;
+	padding-bottom: 100px;
+	position: relative
+}
 
 footer {
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
+	position: absolute;
+  	bottom: 0;
+  	width: 100%;
 }

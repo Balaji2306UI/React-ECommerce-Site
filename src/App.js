@@ -22,7 +22,7 @@ const routes = createBrowserRouter([
             { path: "/", element: <HomePage /> },
             { path: "/about", element: <AboutPage /> },
             { path: "/store", element: <Products /> },
-            { path: "/contact", element: <Contact/> }
+            { path: "/contact", element: <Contact /> },
         ],
     },
 ]);
@@ -63,11 +63,8 @@ const productsArr = [
 ];
 
 function App() {
-    const [show, setShow] = useState(false);
-
-    const hideCart = () => setShow(false);
-    const showCart = () => setShow(true);
-    /*
+    
+    /* 
     return (
         <CartProvider>
             <Cart show={show} hideCart={hideCart} data={productsArr} />
