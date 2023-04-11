@@ -13,6 +13,7 @@ import Root from "./pages/Root";
 import AboutPage from "./pages/About";
 import HomePage from "./pages/Home";
 import Contact from "./pages/Contact";
+import Login from "./pages/Login";
 
 const routes = createBrowserRouter([
     {
@@ -23,6 +24,7 @@ const routes = createBrowserRouter([
             { path: "/about", element: <AboutPage /> },
             { path: "/store", element: <Products /> },
             { path: "/contact", element: <Contact /> },
+            { path: "/login", element: <Login /> },
         ],
     },
 ]);

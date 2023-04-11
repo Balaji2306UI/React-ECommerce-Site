@@ -74,6 +74,7 @@ function CartProvider(props) {
         totalAmount: totalAmount,
         addItem: addItemToCartHandler,
         removeItem: removeItemFromCartHandler,
+        isLoggedIn: false
     };
     return (
         <CartContext.Provider value={cartContext}>
