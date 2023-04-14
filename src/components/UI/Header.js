@@ -19,7 +19,7 @@ function Header(props) {
     let navigate = useNavigate();
 
     function loginRoute() {
-        navigate('/login');
+        navigate("/login");
     }
 
     return (
@@ -44,29 +44,36 @@ function Header(props) {
                         </Link>
                     </Nav.Item>
                     {cartCtx.isLoggedIn && (
-                    <Nav.Item as="li">
-                        <Link className="nav-link" to="/store">
-                            Store
-                        </Link>
-                    </Nav.Item>
+                        <Nav.Item as="li">
+                            <Link className="nav-link" to="/store">
+                                Store
+                            </Link>
+                        </Nav.Item>
                     )}
                     <Nav.Item as="li">
                         <Link className="nav-link" to="/contact">
                             Contact
                         </Link>
                     </Nav.Item>
+
                     {cartCtx.isLoggedIn && (
-                        <Button variant="dark" onClick={props.showCart}>
-                            <i className="fa-solid fa-cart-shopping"></i>
-                            <Badge>{totalCartItems}</Badge>
-                        </Button>
-                    )}
-                    
                         <Nav.Item as="li">
-                            <Button variant="primary" className="px-4" onClick={loginRoute}>Login</Button>
+                            <Button variant="dark" onClick={props.showCart}>
+                                <i className="fa-solid fa-cart-shopping"></i>
+                                <Badge>{totalCartItems}</Badge>
+                            </Button>
                         </Nav.Item>
-                        
-                    
+                    )}
+
+                    <Nav.Item as="li">
+                        <Button
+                            variant="primary"
+                            className="px-4"
+                            onClick={loginRoute}
+                        >
+                            {cartCtx.isLoggedIn ? "Logout" : "Login"}
+                        </Button>
+                    </Nav.Item>
                 </Nav>
             </Container>
         </Navbar>

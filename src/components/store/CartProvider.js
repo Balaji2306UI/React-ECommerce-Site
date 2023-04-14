@@ -41,8 +41,8 @@ function CartProvider(props) {
         }
     ];
     const [menu, setMenu] = useState(products);
-
     const [totalAmount, setTotalAmount] = useState(0);
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     const addItemToCartHandler = (id) => {
         console.log("inside add handler", " ", id)
@@ -74,7 +74,8 @@ function CartProvider(props) {
         totalAmount: totalAmount,
         addItem: addItemToCartHandler,
         removeItem: removeItemFromCartHandler,
-        isLoggedIn: false
+        isLoggedIn,
+        changeLogInState: setIsLoggedIn
     };
     return (
         <CartContext.Provider value={cartContext}>

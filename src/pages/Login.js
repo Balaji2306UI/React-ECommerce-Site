@@ -1,14 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useContext } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Col, FloatingLabel, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import CartContext from "../components/store/cart-context";
 
 function Login() {
+    const emailInputRef = useRef();
+    const passwordInputRef = useRef();
+
+    const cartCtx = useContext(CartContext);
+
     const [showSignUp, setShowSignUp] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
     function toggleSignUp() {
-        setShowSignUp(prevState => !prevState)
+        setShowSignUp((prevState) => !prevState);
+        console.log(showSignUp);
+    }
+    function formSubmitHandler(event) {
+        event.preventDefault();
+        const enteredEmail = emailInputRef.current.value;
+        const enteredPassword = passwordInputRef.current.value;
+        setIsLoading(true);
+        let url;
+        if (showSignUp) {
+            url =
+                "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAHOyRinTiKDLDani_389jFJ6WSITor6NA";
+        } else {
+            url =
+                "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAHOyRinTiKDLDani_389jFJ6WSITor6NA";
+        }
+        fetch(url, {
+            method: "POST",
+            body: JSON.stringify({
+                email: enteredEmail,
+                password: enteredPassword,
+                returnSecureToken: true,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((res) => {
+            setIsLoading(false);
+            if (res.ok) {
+                if(!showSignUp) {
+                    cartCtx.changeLogInState(true);
+                }
+            } else {
+                return res.json().then((data) => {
+                    let errorMessage = "Authentication failed!";
+                    alert(errorMessage);
+                });
+            }
+        });
     }
     return (
         <Card style={{ width: "26rem" }} className="mx-auto">
@@ -16,13 +62,21 @@ function Login() {
                 <Card.Title className="text-center mb-4">
                     {showSignUp ? "Signup" : "Login"}
                 </Card.Title>
-                <Form className="p-4">
+                <Form className="p-4" onSubmit={formSubmitHandler}>
                     <FloatingLabel label="Email" className="mb-4">
-                        <Form.Control type="email" placeholder="Enter email" />
+                        <Form.Control
+                            type="email"
+                            placeholder="Enter email"
+                            ref={emailInputRef}
+                        />
                     </FloatingLabel>
 
                     <FloatingLabel label="Password" className="mb-4">
-                        <Form.Control type="password" placeholder="Password" />
+                        <Form.Control
+                            type="password"
+                            placeholder="Password"
+                            ref={passwordInputRef}
+                        />
                     </FloatingLabel>
                     {!showSignUp && (
                         <Row className="mb-4">
@@ -37,23 +91,21 @@ function Login() {
                         </Row>
                     )}
                     <Row className="px-2 mb-3">
-                        <Button>Submit</Button>
+                        <Button type="submit">
+                            {!isLoading ? "Submit" : "Sending Request..."}
+                        </Button>
                     </Row>
                     {!showSignUp && (
-                    <p className="text-center">
-                        Don't have an account?{" "}
-                        <Link onClick={() => toggleSignUp()}>
-                            Signup
-                        </Link>
-                    </p>
+                        <p className="text-center">
+                            Don't have an account?{" "}
+                            <Link onClick={() => toggleSignUp()}>Signup</Link>
+                        </p>
                     )}
                     {showSignUp && (
-                    <p className="text-center">
-                        Already have an account?{" "}
-                        <Link onClick={() => toggleSignUp()}>
-                            Login
-                        </Link>
-                    </p>
+                        <p className="text-center">
+                            Already have an account?{" "}
+                            <Link onClick={() => toggleSignUp()}>Login</Link>
+                        </p>
                     )}
                 </Form>
             </Card.Body>
