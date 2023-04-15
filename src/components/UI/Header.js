@@ -68,13 +68,24 @@ function Header(props) {
                     )}
 
                     <Nav.Item as="li">
-                        <Button
-                            variant="primary"
-                            className="px-4"
-                            onClick={loginRoute}
-                        >
-                            {authCtx.isLoggedIn ? "Logout" : "Login"}
-                        </Button>
+                        {authCtx.isLoggedIn && (
+                            <Button
+                                variant="primary"
+                                className="px-4"
+                                onClick={authCtx.logout}
+                            >
+                                Logout
+                            </Button>
+                        )}
+                        {!authCtx.isLoggedIn && (
+                            <Button
+                                variant="primary"
+                                className="px-4"
+                                onClick={loginRoute}
+                            >
+                                Login
+                            </Button>
+                        )}
                     </Nav.Item>
                 </Nav>
             </Container>

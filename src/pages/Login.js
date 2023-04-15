@@ -88,9 +88,7 @@ function Login() {
                                 <Form.Check label="Remember me" />
                             </Col>
                             <Col>
-                                <a href="/" to="/home">
-                                    forgot password?
-                                </a>
+                                <Link to="/newPassword">forgot password?</Link>
                             </Col>
                         </Row>
                     )}

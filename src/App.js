@@ -15,6 +15,7 @@ import HomePage from "./pages/Home";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import { AuthContextProvider } from "./components/store/auth-context";
+import ForgotPassword from "./pages/ForgotPassword";
 
 const routes = createBrowserRouter([
     {
@@ -26,6 +27,7 @@ const routes = createBrowserRouter([
             { path: "/store", element: <Products /> },
             { path: "/contact", element: <Contact /> },
             { path: "/login", element: <Login /> },
+            { path: "/newPassword", element: <ForgotPassword /> },
         ],
     },
 ]);
