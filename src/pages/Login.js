@@ -4,13 +4,13 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Col, FloatingLabel, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import CartContext from "../components/store/cart-context";
+import AuthContext from "../components/store/auth-context";
 
 function Login() {
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
 
-    const cartCtx = useContext(CartContext);
+    const authCtx = useContext(AuthContext);
 
     const [showSignUp, setShowSignUp] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -45,16 +45,20 @@ function Login() {
         }).then((res) => {
             setIsLoading(false);
             if (res.ok) {
-                if(!showSignUp) {
-                    cartCtx.changeLogInState(true);
-                }
+                
+                return res.json();
             } else {
                 return res.json().then((data) => {
                     let errorMessage = "Authentication failed!";
-                    alert(errorMessage);
+                    throw new Error(errorMessage);
                 });
             }
-        });
+        }).then(data => {
+            if(!showSignUp) {
+                authCtx.login(data.idToken);
+            }
+            
+        }).catch(error => alert(error.message));
     }
     return (
         <Card style={{ width: "26rem" }} className="mx-auto">

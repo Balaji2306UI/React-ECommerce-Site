@@ -5,12 +5,14 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import CartContext from "../store/cart-context";
+import AuthContext from "../store/auth-context";
 
 import "./Header.css";
 import { Link, useNavigate } from "react-router-dom";
 
 function Header(props) {
     const cartCtx = useContext(CartContext);
+    const authCtx = useContext(AuthContext);
 
     let totalCartItems = cartCtx.cartItems.reduce((totalItems, item) => {
         return totalItems + item.quantity;
@@ -43,7 +45,7 @@ function Header(props) {
                             About
                         </Link>
                     </Nav.Item>
-                    {cartCtx.isLoggedIn && (
+                    {authCtx.isLoggedIn && (
                         <Nav.Item as="li">
                             <Link className="nav-link" to="/store">
                                 Store
@@ -56,7 +58,7 @@ function Header(props) {
                         </Link>
                     </Nav.Item>
 
-                    {cartCtx.isLoggedIn && (
+                    {authCtx.isLoggedIn && (
                         <Nav.Item as="li">
                             <Button variant="dark" onClick={props.showCart}>
                                 <i className="fa-solid fa-cart-shopping"></i>
@@ -71,7 +73,7 @@ function Header(props) {
                             className="px-4"
                             onClick={loginRoute}
                         >
-                            {cartCtx.isLoggedIn ? "Logout" : "Login"}
+                            {authCtx.isLoggedIn ? "Logout" : "Login"}
                         </Button>
                     </Nav.Item>
                 </Nav>

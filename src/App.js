@@ -14,6 +14,7 @@ import AboutPage from "./pages/About";
 import HomePage from "./pages/Home";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
+import { AuthContextProvider } from "./components/store/auth-context";
 
 const routes = createBrowserRouter([
     {
@@ -76,7 +77,10 @@ function App() {
         </CartProvider>
     );
     */
-    return <RouterProvider router={routes} />;
+    return <AuthContextProvider>
+        <RouterProvider router={routes} />;
+    </AuthContextProvider>
+    
 }
 
 export default App;
