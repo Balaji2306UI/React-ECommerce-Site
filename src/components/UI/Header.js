@@ -8,7 +8,7 @@ import CartContext from "../store/cart-context";
 import AuthContext from "../store/auth-context";
 
 import "./Header.css";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Header(props) {
     const cartCtx = useContext(CartContext);
@@ -36,26 +36,26 @@ function Header(props) {
                     as="ul"
                 >
                     <Nav.Item as="li">
-                        <Link className="nav-link" to="/">
+                        <NavLink activeClassName="active" className="nav-link" to="/">
                             Home
-                        </Link>
+                        </NavLink>
                     </Nav.Item>
                     <Nav.Item as="li">
-                        <Link className="nav-link" to="/about">
+                        <NavLink className="nav-link" to="/about">
                             About
-                        </Link>
+                        </NavLink>
                     </Nav.Item>
                     {authCtx.isLoggedIn && (
                         <Nav.Item as="li">
-                            <Link className="nav-link" to="/store">
+                            <NavLink className="nav-link" to="/store">
                                 Store
-                            </Link>
+                            </NavLink>
                         </Nav.Item>
                     )}
                     <Nav.Item as="li">
-                        <Link className="nav-link" to="/contact">
+                        <NavLink className="nav-link" to="/contact">
                             Contact
-                        </Link>
+                        </NavLink>
                     </Nav.Item>
 
                     {authCtx.isLoggedIn && (

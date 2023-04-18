@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,15 +8,16 @@ import Products from "./Products";
 import Cart from "./components/Cart";
 import CartProvider from "./components/store/CartProvider";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./pages/Root";
+import { Routes, Route, Navigate } from "react-router-dom";
 import AboutPage from "./pages/About";
 import HomePage from "./pages/Home";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
+import AuthContext from "./components/store/auth-context";
 import { AuthContextProvider } from "./components/store/auth-context";
 import ForgotPassword from "./pages/ForgotPassword";
 
+/*
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -30,7 +31,7 @@ const routes = createBrowserRouter([
             { path: "/newPassword", element: <ForgotPassword /> },
         ],
     },
-]);
+]); */
 
 const productsArr = [
     {
@@ -68,7 +69,12 @@ const productsArr = [
 ];
 
 function App() {
-    
+    const [show, setShow] = useState(false);
+    const hideCart = () => setShow(false);
+    const showCart = () => setShow(true);
+
+    const authCtx = useContext(AuthContext);
+
     /* 
     return (
         <CartProvider>
@@ -79,10 +85,52 @@ function App() {
         </CartProvider>
     );
     */
+    /*
     return <AuthContextProvider>
-        <RouterProvider router={routes} />;
+        <BrowserRouter>
+            <Route path="/" element={<Root/>}></Route>
+        </BrowserRouter>
     </AuthContextProvider>
-    
+    */
+    return (
+        <CartProvider>
+            <Cart show={show} hideCart={hideCart} data={productsArr} />
+            <Header showCart={showCart} />
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="about" element={<AboutPage />} />
+                <Route
+                    path="/store"
+                    element={
+                        <>
+                            {authCtx.isLoggedIn && <Products />}
+                            {!authCtx.isLoggedIn && <Navigate to="/login" />}
+                        </>
+                    }
+                />
+                <Route path="contact" element={<Contact />} />
+                <Route
+                    path="login"
+                    element={
+                        <>
+                            {authCtx.isLoggedIn && <Navigate to="/" />}
+                            {!authCtx.isLoggedIn && <Login />}
+                        </>
+                    }
+                />
+                <Route
+                    path="newPassword"
+                    element={
+                        <>
+                            {authCtx.isLoggedIn && <ForgotPassword />}
+                            {!authCtx.isLoggedIn && <Navigate to="/login" />}
+                        </>
+                    }
+                />
+            </Routes>
+            <Footer />
+        </CartProvider>
+    );
 }
 
 export default App;

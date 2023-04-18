@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Col, FloatingLabel, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../components/store/auth-context";
 
 function Login() {
@@ -14,6 +14,8 @@ function Login() {
 
     const [showSignUp, setShowSignUp] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     function toggleSignUp() {
         setShowSignUp((prevState) => !prevState);
@@ -56,6 +58,7 @@ function Login() {
         }).then(data => {
             if(!showSignUp) {
                 authCtx.login(data.idToken);
+                navigate('/')
             }
             
         }).catch(error => alert(error.message));
